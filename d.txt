@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Click to Enter</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #splash {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: opacity 1s ease;
+      z-index: 2;
+    }
+    #splash h1 {
+      font-size: 3rem;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+    #content {
+      opacity: 0;
+      transition: opacity 1s ease;
+      z-index: 1;
+      text-align: center;
+      padding: 20px;
+    }
+    #content.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div id="splash">
+    <h1>Click to Enter</h1>
+  </div>
+
+  <div id="content">
+    <h1>Welcome to My Website!</h1>
+    <p>This is your main content area. 🎉</p>
+  </div>
+
+  <!-- Embed the chosen YouTube video, hidden initially -->
+  <iframe id="audioFrame"
+          src="https://www.youtube.com/embed/QK72bHiqM-Q?autoplay=0&controls=0&rel=0"
+          allow="autoplay"
+          style="display:none;"></iframe>
+
+  <script>
+    const splash = document.getElementById('splash');
+    const content = document.getElementById('content');
+    const audioFrame = document.getElementById('audioFrame');
+
+    splash.addEventListener('click', () => {
+      // Fade out splash
+      splash.style.opacity = '0';
+      setTimeout(() => {
+        splash.style.display = 'none';
+        content.classList.add('show');
+      }, 1000);
+
+      // Start the audio (YouTube embed auto plays when shown)
+      audioFrame.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
